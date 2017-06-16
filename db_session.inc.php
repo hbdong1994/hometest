@@ -10,7 +10,7 @@ $sdbc = null;
 function open_session()
 {
     global $sdbc;
-    $sdbc = mysqli_connect('localhost', 'root', 'root', 'home_test');
+    $sdbc = mysqli_connect('localhost', 'dean_hometest', 'NxACxrXJnT', 'dean_hometest');
     return true;
 }
 

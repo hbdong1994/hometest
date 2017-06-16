@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript" src="../js/vue.js"></script>
+<div id="app">
+    <p v-if="seen">现在是可见的</p>
+</div>
+
+<div id="app2">
+    <ol>
+        <li v-for="todo in todos">
+            {{ todo.text }}
+        </li>
+    </ol>
+    <span v-if="todo_seen">{{ msg }}</span>
+</div>
+<script type="text/javascript">
+    var app = new Vue({
+        el : "#app",
+        data : {
+            seen : true
+        }
+    });
+    var app2 = new Vue({
+        el : "#app2",
+        data: {
+            todos : [
+                { text: "vue1"},
+                { text: "vue2"},
+                { text: "vue3"}
+            ],
+            msg : 'this is array',
+            todo_seen: true
+        }
+    })
+</script>
+</body>
+</html>
