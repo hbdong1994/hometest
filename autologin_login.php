@@ -31,7 +31,7 @@ if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
 
     $alert = '登录成功';
 }
-
+testSublime();
 ?>
 
 <!

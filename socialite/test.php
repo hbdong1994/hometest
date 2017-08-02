@@ -1,7 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: XD
- * Date: 2017/6/26
- * Time: 11:44
- */
+
+require 'vendor/autoload.php';
+
+use Laravel\Socialite\Facades\Socialite;
+
+
+
