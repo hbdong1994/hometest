@@ -1,0 +1,122 @@
+<!
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>支付测试</title>
+    <link href="public/vendor/layui/css/layui.css"  rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<fieldset class="layui-elem-field layui-field-title" style="text-align: center">
+    <legend style="text-align: center">充值测试</legend>
+</fieldset>
+
+<form class="layui-form" method="post" action="req.php">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">订单金额</label>
+        <div class="layui-input-block">
+            <input type="text" name="order_amt" placeholder="请输入订单金额" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">加密方式</label>
+        <div class="layui-input-block">
+            <input type="text" name="sign_type" value="md5" readonly placeholder="请输入加密方式" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">充值方式</label>
+        <div class="layui-input-block">
+            <select name="recharge_type" lay-filter="showBank">
+                <option value="weixin">微信扫码</option>
+                <option value="alipay">支付宝扫码</option>
+                <option value="bank">在线银行</option>
+                <option value="weixin_wap">微信WAP</option>
+                <option value="alipay_wap">支付宝WAP</option>
+                <option value="bank_wap">银联在线</option>
+                <option value="qq">QQ扫码</option>
+                <option value="qq_wap">QQWAP</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item" id="bankMap" style="display: none">
+        <label class="layui-form-label">银行类型</label>
+        <div class="layui-input-block">
+            <select name="bank_code">
+                <option value="icbc">中国工商银行</option>
+                <option value="abc">中国农业银行</option>
+                <option value="cmb">中国招商银行</option>
+                <option value="boc">中国银行</option>
+                <option value="cmbc">中国民生银行</option>
+                <option value="ccb">中国建设银行</option>
+                <option value="citic">中信银行</option>
+                <option value="comm">交通银行</option>
+                <option value="cib">兴业银行</option>
+                <option value="ceb">光大银行</option>
+                <option value="sdb">深圳发展银行</option>
+                <option value="psbc">中国邮政</option>
+                <option value="bob">北京银行</option>
+                <option value="pab">平安银行</option>
+                <option value="spdb">浦发银行</option>
+                <option value="gdb">广东发展银行</option>
+                <option value="nbcb">宁波银行</option>
+                <option value="bjrcb">北京农村商业银行</option>
+                <option value="njcb">南京银行</option>
+                <option value="czb">浙商银行</option>
+                <option value="bosh">上海银行</option>
+                <option value="hxb">华夏银行</option>
+                <option value="hzb">杭州银行</option>
+                <option value="czcb">浙江江稠州商业银行</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品描述</label>
+        <div class="layui-input-block">
+            <textarea name="body" placeholder="请输入商品描述" class="layui-textarea">111</textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </div>
+
+</form>
+<script type="text/javascript" src="public/js/jquery.min.js"></script>
+<script type="text/javascript" src="public/vendor/layui/layui.all.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+        form.on('select(showBank)', function(data) {
+             if (data.value == 'bank') {
+                 $("#bankMap").show();
+             } else {
+                 $("#bankMap").hide();
+             }
+        });
+    });
+</script>
+</body>
+</html>
