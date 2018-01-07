@@ -15,3 +15,5 @@ $data = [
     'trans' => '2.9',
     'charge' => '',
 ];
+
+echo date('Y-m-d 00:00:00', strtotime('-1 year'));
