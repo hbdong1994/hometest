@@ -69,22 +69,16 @@ function getAccessToken($cfg)
     $code = $_GET['code'];
     $access_url = 'https://zjuam.zju.edu.cn/cas/oauth2.0/accessToken';
     $params = [
-        'client_id' => $cfg['app_id'],
+        'client_id' => $cfg['app_key'],
         'client_secret' => $cfg['app_secret'],
         'redirect_uri' => $cfg['redirect_uri'],
         'code' => $code
     ];
     $res = curlHttp($access_url, $params, 'get');
-    if ($res['http_code'] == 200) {
-        $response = json_decode($res['body'], true);
-        if (array_key_exists('errorcode', $response)) {
-            throw new Exception('curl请求错误! [http_code]:'.$res['http_code'] . '\t[body]:'.$res['body']);
-        }
-        $response += ['store_at' => time()];
-        file_put_contents($cfg['access_file'], json_encode($response));
-        return $response;
-    }
-    throw new Exception('curl请求错误! [http_code]:'.$res['http_code'] . '\t[body]:'.$res['body']);
+    $response = filterResponse($res);
+    $response += ['store_at' => time()];
+    file_put_contents($cfg['access_file'], json_encode($response));
+    return $response;
 }
 
 function getAuthToken($cfg)
@@ -108,7 +102,25 @@ function getAuthInfo($cfg)
 {
     $info_url = 'https://zjuam.zju.edu.cn/cas/oauth2.0/profile';
     $access_token = getAuthToken($cfg);
+    $res = curlHttp($info_url, ['access_token' =>$access_token], 'get');
+    return filterResponse($res);
+}
 
-
+/**
+ * @param $res
+ *
+ * @return mixed
+ * @throws \Exception
+ */
+function filterResponse($res)
+{
+    if ($res['http_code'] == 200) {
+        $response = json_decode($res['body'], true);
+        if (array_key_exists('errorcode', $response)) {
+            throw new Exception('接口返回错误----> [errorcode]:'. $response['errorcode']."\t {$response['errormsg']}");
+        }
+        return $response;
+    }
+    throw new Exception('curl请求错误---->[http_code]:'.$res['http_code'] . "\t[body]:".$res['body']);
 
 }

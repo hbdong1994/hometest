@@ -1,8 +1,15 @@
 <?php
 require 'helper.php';
 $cfg = require('config.php');
-
-
+try {
+    $info = getAuthInfo($cfg);
+    var_dump($info);
+} catch (Exception $exception) {
+    $fp = fopen('log.txt', 'a+');
+    fwrite($fp, $exception);
+    fclose($fp);
+    echo $exception->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +20,7 @@ $cfg = require('config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>投票首页</title>
     <link rel="stylesheet" href="public/bootstrap/css/bootstrap.min.css">
+
     <script type="text/javascript" src="public/jquery.min.js"></script>
     <script type="text/javascript" src="public/bootstrap/js/bootstrap.min.js"></script>
 </head>
