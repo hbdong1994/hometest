@@ -77,33 +77,50 @@ function getAccessToken($cfg)
     $res = curlHttp($access_url, $params, 'get');
     $response = filterResponse($res);
     $response += ['store_at' => time()];
-    file_put_contents($cfg['access_file'], json_encode($response));
+//    file_put_contents($cfg['access_file'], json_encode($response));
     return $response;
 }
 
 function getAuthToken($cfg)
 {
-    if (file_exists($cfg['access_file'])) {
-        $access = json_decode(file_get_contents($cfg['access_file']), true);
-        if (($access['store_at'] + $access['expires_in']) < time()) {
-            $access_token = $access['access_token'];
-        } else {
-            //请求新的
-            $access_token = getAccessToken($cfg)['access_token'];
-        }
-    } else {
-        //请求新的
-        $access_token = getAccessToken($cfg)['access_token'];
-    }
+//    if (file_exists($cfg['access_file'])) {
+//        $access = json_decode(file_get_contents($cfg['access_file']), true);
+//        if (($access['store_at'] + $access['expires_in']) < time()) {
+//            $access_token = $access['access_token'];
+//        } else {
+//            //请求新的
+//            $access_token = getAccessToken($cfg)['access_token'];
+//        }
+//    } else {
+//        //请求新的
+//        $access_token = getAccessToken($cfg)['access_token'];
+//    }
+    $access_token = getAccessToken($cfg)['access_token'];
     return $access_token;
 }
 
 function getAuthInfo($cfg)
 {
-    $info_url = 'https://zjuam.zju.edu.cn/cas/oauth2.0/profile';
-    $access_token = getAuthToken($cfg);
-    $res = curlHttp($info_url, ['access_token' =>$access_token], 'get');
-    return filterResponse($res);
+    $info = getSessionUser();
+    if ($info == null) {
+        $info_url = 'https://zjuam.zju.edu.cn/cas/oauth2.0/profile';
+        $access_token = getAuthToken($cfg);
+        $res = curlHttp($info_url, ['access_token' =>$access_token], 'get');
+        $info = filterResponse($res);
+        setSessionUser($info);
+    }
+    return $info;
+}
+
+
+function getSessionUser()
+{
+    return isset($_SESSION['info']) ? json_decode($_SESSION['info'], true) : null;
+}
+
+function setSessionUser($info)
+{
+    $_SESSION['info'] = json_encode($info);
 }
 
 /**
@@ -123,4 +140,11 @@ function filterResponse($res)
     }
     throw new Exception('curl请求错误---->[http_code]:'.$res['http_code'] . "\t[body]:".$res['body']);
 
+}
+
+function getAuthorizenUrl($cfg)
+{
+    $auth_url = "https://zjuam.zju.edu.cn/cas/oauth2.0/authorize";
+    $auth_url .= "?response_type=code&client_id={$cfg['app_key']}&redirect_uri={$cfg['redirect_uri']}";
+    return $auth_url;
 }
