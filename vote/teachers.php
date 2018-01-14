@@ -1,4 +1,5 @@
 <?php
+$cfg = require ('config.php');
 $teachers = json_decode(file_get_contents('public/teachers.json'), true);
 $showStr = '';
 $row = <<<row
@@ -11,14 +12,16 @@ $row = <<<row
             <a target="_blank" href="detail.php?uid=%s">
                 <h4>%s</h4>
             </a>
-            <p><input type="checkbox" value="%s" name="support[]"> 投票</p>
+            <p><input type="checkbox" value="%s" name="support[]" id="support%d"> <label for="support%d">投票</label></p>
         </div>
     </div>
 </div>
 row;
 
+$loop = 0;
 foreach ($teachers as $key => $teacher) {
-    $showStr .= sprintf($row, $key, $teacher['image'], $teacher['name'], $key, $teacher['name'], $key);
+    $showStr .= sprintf($row, $key, $teacher['image'], $teacher['name'], $key, $teacher['name'], $key, $loop, $loop);
+    $loop++;
 }
 
 ?>
@@ -47,6 +50,7 @@ foreach ($teachers as $key => $teacher) {
                     <li>浙江大学农学院院全体学生具有投票权</li>
                     <li>投票人可从评选老师中至多选择10位进行投票</li>
                     <li>每日限投一次，每次最多选择10位人选投票</li>
+                    <li>投票时间：<?=$cfg['teach_time']['start']?> - <?=$cfg['teach_time']['end']?></li>
                     <li>
                         如对候选人及投票工作有异议，可通过电话或邮件向评选工作委员会反映：
                         <p>施伊晟 15157774875   yisheng30000@163.com</p>
@@ -63,7 +67,7 @@ foreach ($teachers as $key => $teacher) {
     </div>
     </form>
 
-    <div class="ali"><button class="btn btn-primary" id="voteBtn">投票</button></div>
+    <div class="ali"><span> 已选择 <span id="support_num" class="label label-info" >0</span> 位</span><button class="btn btn-primary btn-lg center-block" id="voteBtn">投票</button> </div>
 </div>
 
 <script>
@@ -83,6 +87,11 @@ foreach ($teachers as $key => $teacher) {
                 document.getElementById('postVoteForm').submit();
             }
 
+        });
+
+        $('input[type="checkbox"]').click(function() {
+            var checked = $('input[type="checkbox"]:checked');
+            $('#support_num').text(checked.length);
         });
     })
 

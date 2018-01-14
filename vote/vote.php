@@ -3,7 +3,9 @@ session_start();
 require 'helper.php';
 $cfg = require('config.php');
 try {
-    $info = getAuthInfo($cfg);
+    if (getSessionUser() === null) {
+        $info = getAuthInfo($cfg);
+    }
 } catch (Exception $exception) {
     $fp = fopen('log.txt', 'a+');
     fwrite($fp, "[".date('Y-m-d H:i:s')."]" . $exception);

@@ -101,14 +101,14 @@ function getAuthToken($cfg)
 
 function getAuthInfo($cfg)
 {
-    $info = getSessionUser();
-    if ($info == null) {
-        $info_url = 'https://zjuam.zju.edu.cn/cas/oauth2.0/profile';
-        $access_token = getAuthToken($cfg);
-        $res = curlHttp($info_url, ['access_token' =>$access_token], 'get');
-        $info = filterResponse($res);
-        setSessionUser($info);
-    }
+//    $info = getSessionUser();
+//    if ($info == null) {
+    $info_url = 'https://zjuam.zju.edu.cn/cas/oauth2.0/profile';
+    $access_token = getAuthToken($cfg);
+    $res = curlHttp($info_url, ['access_token' =>$access_token], 'get');
+    $info = filterResponse($res);
+    setSessionUser($res['body']);
+//    }
     return $info;
 }
 
@@ -118,9 +118,9 @@ function getSessionUser()
     return isset($_SESSION['info']) ? json_decode($_SESSION['info'], true) : null;
 }
 
-function setSessionUser($info)
+function setSessionUser($resJson)
 {
-    $_SESSION['info'] = json_encode($info);
+    $_SESSION['info'] = $resJson;
 }
 
 /**

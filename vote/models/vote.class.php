@@ -64,5 +64,17 @@ class VoteModel
         mysqli_query($this->conn, $insert_sql);
     }
 
+    public function getVoteRecords($candidate=null)
+    {
+        if ($candidate == null) {
+            $query = "select count(candidate) as `support`, candidate from {$this->vote_list_table} GROUP BY candidate";
+        } else {
+            $query = "select count(*) as `support`, candidatefrom {$this->vote_list_table} WHERE candidate='{$candidate}'";
+        }
+        $rows = mysqli_query($this->conn, $query);
+        return $rows;
+
+    }
+
 
 }

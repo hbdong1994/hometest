@@ -5,7 +5,7 @@
  * Date: 2018/1/14
  * Time: 15:08
  */
-require ('vote.class.php');
+require_once ('vote.class.php');
 class TeacherVote extends VoteModel
 {
     protected $voted_table = 't_voters';

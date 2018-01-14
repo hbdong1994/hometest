@@ -1,6 +1,3 @@
-<?php
-$cfg = require('config.php');
-?>
 
 <!DOCTYPE html>
 <html>
@@ -38,7 +35,7 @@ $cfg = require('config.php');
                 <div class="caption">
                     <h3>浙江大学农学院第二届“我最喜爱的老师”评选</h3>
                     <p><a href="teachers.php" class="btn btn-primary" role="button">进入投票</a></p>
-                    <p>投票时间: <?=$cfg['teacher_start']?> - <?=$cfg['teacher_end']?></p>
+                    <p>投票时间: <?=$cfg['teach_time']['start']?> - <?=$cfg['teach_time']['end']?></p>
                 </div>
             </div>
         </div>
@@ -47,7 +44,7 @@ $cfg = require('config.php');
                 <div class="caption">
                     <h3>浙江大学农学院十佳学子评选</h3>
                     <p><a href="students.php" class="btn btn-primary" role="button">进入投票</a></p>
-                    <p>投票时间: <?=$cfg['student_start']?> - <?=$cfg['student_end']?></p>
+                    <p>投票时间: <?=$cfg['stu_time']['start']?> - <?=$cfg['stu_time']['end']?></p>
                 </div>
             </div>
         </div>

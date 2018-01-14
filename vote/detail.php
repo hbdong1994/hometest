@@ -14,7 +14,7 @@ if ( ! array_key_exists($uid, $teachers)) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
+    <title><?=$teacher['name']?> - 浙江大学农学院第二届“我最喜爱的老师”评选</title>
     <link rel="stylesheet" href="public/bootstrap/css/bootstrap.min.css">
     <script type="text/javascript" src="public/jquery.min.js"></script>
     <script type="text/javascript" src="public/bootstrap/js/bootstrap.min.js"></script>

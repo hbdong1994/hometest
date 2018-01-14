@@ -8,10 +8,14 @@ return [
     'access_file' => 'access_token.txt',
     'sandbox_username' => 't_9846253710g',
     'sandbox_password' => 'ij93v2b5',
-    'teacher_start' => '2018-01-15 16:00:00',
-    'teacher_end' => '2018-01-19 16:00:00',
-    'student_start' => '2018-01-17 16:00:00',
-    'student_end' => '2018-01-20 16:00:00',
+    'teach_time' => [
+        'start' => '2018-01-15 16:00:00',
+        'end' => '2018-01-19 16:00:00'
+    ],
+    'stu_time' => [
+        'start' => '2018-01-17 16:00:00',
+        'end' => '2018-01-20 16:00:00',
+    ],
     'debug' => true,
     'db' => [
         'database' => 'votes',
