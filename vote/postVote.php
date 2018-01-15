@@ -36,7 +36,12 @@ if ($info === null) {
 }
 
 if ($info['attributes'][3]['DWH'] != "516000") {
-    exit('<script>alert("您无权限投票！限【浙江大学农学院院全体学生】");window.history.back();</script>');
+    exit('<script>alert("您无权限投票！限【浙江大学农学院】可参与投票");window.history.back();</script>');
+}
+if ($type != 'stu') {
+    if (in_array($info['attributes'][2]['YHLX'], ['313', '312', '351', '331'])) {
+        exit('<script>alert("您无权限投票！限【浙江大学农学院学生】可参与投票");window.history.back();</script>');
+    }
 }
 
 if ($model->isVoted($info['id'])) {

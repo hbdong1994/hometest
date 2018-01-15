@@ -67,7 +67,7 @@ class VoteModel
     public function getVoteRecords($candidate=null)
     {
         if ($candidate == null) {
-            $query = "select count(candidate) as `support`, candidate from {$this->vote_list_table} GROUP BY candidate";
+            $query = "select count(candidate) as `support`, candidate from {$this->vote_list_table} GROUP BY candidate ORDER BY `support` desc";
         } else {
             $query = "select count(*) as `support`, candidatefrom {$this->vote_list_table} WHERE candidate='{$candidate}'";
         }

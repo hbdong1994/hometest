@@ -11,4 +11,4 @@ if (getSessionUser() === null) {
     header('location:'.$auth_url);
     exit();
 }
-header('location:teachers.php');
+header('location:vote.php');

@@ -36,7 +36,7 @@ if ( ! array_key_exists($uid, $students)) {
                     </div>
                 </div>
                 <div class="col-md-8 ol-xs-7 col-sm-7">
-                    <h1><?= $student['name'] ?></h1>
+                    <h3 style="text-align: center"><?= $student['name'] ?></h3>
                     <span id="detail">
                         <?= $student['reason'] ?>
                     </span>
