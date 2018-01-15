@@ -13,21 +13,21 @@
 <body>
 <div class="container-fluid">
     <div class="row col-sm-10 col-md-8 col-lg-8">
-        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
             <div class="thumbnail">
                 <div class="caption">
                     <h3>浙江大学农学院第二届“我最喜爱的老师”评选</h3>
                     <p><a href="teachers.php" class="btn btn-primary" role="button">进入投票</a></p>
-                    <p>投票时间: <?=$cfg['teach_time']['start']?> - <?=$cfg['teach_time']['end']?></p>
+                    <p>投票时间: <?=date('Y年m月d日 H点' , strtotime($cfg['teach_time']['start']))?> - <?=date('Y年m月d日 H点', strtotime($cfg['teach_time']['end']))?></p>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-6">
+        <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
             <div class="thumbnail">
                 <div class="caption">
                     <h3>浙江大学农学院十佳学子评选</h3>
                     <p><a href="students.php" class="btn btn-primary" role="button">进入投票</a></p>
-                    <p>投票时间: <?=$cfg['stu_time']['start']?> - <?=$cfg['stu_time']['end']?></p>
+                    <p>投票时间: <?=date('Y年m月d日 H点' , strtotime($cfg['stu_time']['start']))?> - <?=date('Y年m月d日 H点', strtotime($cfg['stu_time']['end']))?></p>
                 </div>
             </div>
         </div>

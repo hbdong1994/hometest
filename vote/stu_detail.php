@@ -19,10 +19,12 @@ if ( ! array_key_exists($uid, $students)) {
     <script type="text/javascript" src="public/jquery.min.js"></script>
     <script type="text/javascript" src="public/bootstrap/js/bootstrap.min.js"></script>
     <style type="text/css">
-
+        span#detail p {
+            font-size: 1.2em;
+        }
     </style>
 </head>
-<body>
+<body style="font-family: 宋体">
 <div class="container-fluid">
     <?php
         if (isset($errors)) {
@@ -36,8 +38,8 @@ if ( ! array_key_exists($uid, $students)) {
                     </div>
                 </div>
                 <div class="col-md-8 ol-xs-7 col-sm-7">
-                    <h3 style="text-align: center"><?= $student['name'] ?></h3>
-                    <span id="detail">
+                    <h2 style="text-align: center"><?= $student['name'] ?></h2>
+                    <span id="detail" style="text-indent: 2em">
                         <?= $student['reason'] ?>
                     </span>
                 </div>

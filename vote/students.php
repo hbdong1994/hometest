@@ -13,8 +13,8 @@ $row = <<<row
                 <h4  style="text-align: center">%s</h4>
             </a>
                  <p><input type="checkbox" value="%s" name="support[]" id="support%d"> 
-            <label for="support%d">投票</label> 
-            <a href="stu_detail.php?uid=%s" target="_blank" class="btn btn-sm btn-info">查看详情</a>
+            <label for="support%d"><span class="btn btn-sm btn-info">投票</span></label> 
+            <a href="stu_detail.php?uid=%s" target="_blank" class="btn btn-sm">查看详情</a>
             </p>
         </div>
     </div>
@@ -52,10 +52,9 @@ foreach ($students as $key => $student) {
             <div class="panel-heading"><h4>投票说明:</h4></div>
             <div class="panel-body">
                 <ul style="font-size: 13px">
-                    <li>浙江大学农学院院全体学生与老师具有投票权</li>
-                    <li>投票人可从评选学生中至多选择10位进行投票</li>
-                    <li>每日限投一次，每次最多选择10位人选投票</li>
-                    <li>投票时间：<?=$cfg['stu_time']['start']?> - <?=$cfg['stu_time']['end']?></li>
+                    <li>浙江大学农学院全体师生具有投票权。</li>
+                    <li>每个账号限投一次，每次最多选择10位候选人投票。</li>
+                    <li>投票时间：<?=date('Y年m月d日 H点' , strtotime($cfg['stu_time']['start']))?> - <?=date('Y年m月d日 H点', strtotime($cfg['stu_time']['end']))?></li>
                     <li>
                         如对候选人及投票工作有异议，可通过电话或邮件向评选工作委员会反映：
                         <br/>施伊晟 15157774875   yisheng30000@163.com

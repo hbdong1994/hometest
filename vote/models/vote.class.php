@@ -34,7 +34,8 @@ class VoteModel
     public function isVoted($uid)
     {
         $date = date('Y-m-d');
-        $query = "select * from {$this->voted_table} where uid='{$uid}' and `date`='{$date}'";
+//        $query = "select * from {$this->voted_table} where uid='{$uid}' and `date`='{$date}'";
+        $query = "select * from {$this->voted_table} where uid='{$uid}'";
         $result = mysqli_query($this->conn, $query);
         if (mysqli_fetch_row($result) == 0) {
             return false;
