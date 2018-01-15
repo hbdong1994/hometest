@@ -1,5 +1,11 @@
 <?php
+session_start();
+require ('helper.php');
 $cfg = require ('config.php');
+if (getSessionUser() === null) {
+    header('location:'.getAuthorizenUrl($cfg));
+    exit();
+}
 $teachers = json_decode(file_get_contents('public/teachers.json'), true);
 $showStr = '';
 $row = <<<row
