@@ -1,5 +1,20 @@
 <?php
+session_start();
+require ('helper.php');
 $cfg = require ('config.php');
+require ('models/student.class.php');
+if (getSessionUser() === null) {
+    header('location:'.getAuthorizenUrl($cfg).'&state=stu');
+    exit();
+}
+
+$model = new StudentVote();
+
+$records = $model->getVoteRecords();
+$votes = [];
+while ($row = $records->fetch_assoc()) {
+    $votes[$row['candidate']] = $row['support'];
+}
 $students = json_decode(file_get_contents('public/students.json'), true);
 $showStr = '';
 $row = <<<row
@@ -15,6 +30,7 @@ $row = <<<row
                  <p><input type="checkbox" value="%s" name="support[]" id="support%d"> 
             <label for="support%d"><span class="btn btn-sm btn-info">投票</span></label> 
             <a href="stu_detail.php?uid=%s" target="_blank" class="btn btn-sm">查看详情</a>
+                        <span class="btn btn-xs bottom-right"><span class="btn btn-success right">%s</span> 票</span>
             </p>
         </div>
     </div>
@@ -22,7 +38,7 @@ $row = <<<row
 row;
 $loop = 0;
 foreach ($students as $key => $student) {
-    $showStr .= sprintf($row, $key, $student['image'], $student['name'], $key, $student['name'], $key, $loop, $loop, $key);
+    $showStr .= sprintf($row, $key, $student['image'], $student['name'], $key, $student['name'], $key, $loop, $loop, $key, array_key_exists($key, $votes)? $votes[$key]: 0);
     $loop++;
 }
 
@@ -53,8 +69,8 @@ foreach ($students as $key => $student) {
             <div class="panel-body">
                 <ul style="font-size: 13px">
                     <li>浙江大学农学院全体师生具有投票权。</li>
-                    <li>每个账号限投一次，每次最多选择10位候选人投票。</li>
-                    <li>投票时间：<?=date('Y年m月d日 H点' , strtotime($cfg['stu_time']['start']))?> - <?=date('Y年m月d日 H点', strtotime($cfg['stu_time']['end']))?></li>
+                    <li>投票人需从候选人中至少选择5位，至多选择10位进行投票，每个账号限投一次。</li>
+                    <li>投票时间：<?=date('Y年m月d日 H点' , strtotime($cfg['stu_time']['start']))?> - <?=date('Y年m月d日 H点', strtotime($cfg['stu_time']['end']))?> 。</li>
                     <li>
                         如对候选人及投票工作有异议，可通过电话或邮件向评选工作委员会反映：
                         <br/>施伊晟 15157774875   yisheng30000@163.com
@@ -75,36 +91,7 @@ foreach ($students as $key => $student) {
     <div class="ali"><span> 已选择 <span id="support_num" class="label label-info" >0</span> 位</span><button class="btn btn-primary btn-lg center-block" id="voteBtn">投票</button> </div>
 </div>
 
-<script>
-    $(function() {
-
-        var checked = $('input[type="checkbox"]:checked');
-        $('#support_num').text(checked.length);
-
-        $("#voteBtn").click(function () {
-            var checked = $('input[type="checkbox"]:checked');
-            var  post = true;
-            if (checked.length == 0) {
-                post = false;
-                alert('需要选择一位选手投票!');
-            }
-            if (checked.length > 10) {
-                post = false;
-                alert('最多只能选择10位投票!');
-            }
-            if (post) {
-                document.getElementById('postVoteForm').submit();
-            }
-
-        });
-
-        $('input[type="checkbox"]').click(function() {
-            var checked = $('input[type="checkbox"]:checked');
-            $('#support_num').text(checked.length);
-        });
-    })
-
-</script>
+<script type="text/javascript" src="public/postVote.js"></script>
 
 </body>
 </html>

@@ -9,14 +9,14 @@ return [
     'sandbox_username' => 't_9846253710g',
     'sandbox_password' => 'ij93v2b5',
     'teach_time' => [
-        'start' => '2018-01-15 16:00:00',
+        'start' => '2018-01-15 23:00:00',
         'end' => '2018-01-19 16:00:00'
     ],
     'stu_time' => [
         'start' => '2018-01-17 16:00:00',
         'end' => '2018-01-20 16:00:00',
     ],
-    'debug' => true,
+    'debug' => false,
     'db' => [
         'database' => 'votes',
         'host' => '47.52.161.238',

@@ -1,11 +1,22 @@
 <?php
 session_start();
 require ('helper.php');
+require ('models/teacher.class.php');
+
 $cfg = require ('config.php');
 if (getSessionUser() === null) {
-    header('location:'.getAuthorizenUrl($cfg));
+    header('location:'.getAuthorizenUrl($cfg).'&state=teach');
     exit();
 }
+
+$model = new TeacherVote();
+
+$records = $model->getVoteRecords();
+while ($row = $records->fetch_assoc()) {
+    $votes[$row['candidate']] = $row['support'];
+}
+
+
 $teachers = json_decode(file_get_contents('public/teachers.json'), true);
 $showStr = '';
 $row = <<<row
@@ -21,6 +32,7 @@ $row = <<<row
             <p><input type="checkbox" value="%s" name="support[]" id="support%d"> 
             <label for="support%d"><span class="btn btn-sm btn-info">投票</span></label> 
             <a href="detail.php?uid=%s" target="_blank" class="btn btn-sm ">查看详情</a>
+            <span class="btn btn-xs bottom-right"><span class="btn btn-success right">%s</span> 票</span>
             </p>
         </div>
     </div>
@@ -29,7 +41,7 @@ row;
 
 $loop = 0;
 foreach ($teachers as $key => $teacher) {
-    $showStr .= sprintf($row, $key, $teacher['image'], $teacher['name'], $key, $teacher['name'], $key, $loop, $loop, $key);
+    $showStr .= sprintf($row, $key, $teacher['image'], $teacher['name'], $key, $teacher['name'], $key, $loop, $loop, $key, array_key_exists($key, $votes)? $votes[$key]: 0);
     $loop++;
 }
 
@@ -60,7 +72,7 @@ foreach ($teachers as $key => $teacher) {
             <div class="panel-body">
                 <ul style="font-size: 13px">
                     <li>浙江大学农学院全体学生具有投票权</li>
-                    <li>投票人可从评选老师中至多选择10位进行投票，每个账号限投一次；评选老师按照姓氏笔画排序</li>
+                    <li>投票人需从候选老师中至少选择5位，至多选择10位进行投票，每个账号限投一次；评选老师按照姓氏笔画排序</li>
                     <li>投票时间：<?=date('Y年m月d日 H点' , strtotime($cfg['teach_time']['start']))?> - <?=date('Y年m月d日 H点', strtotime($cfg['teach_time']['end']))?></li>
                     <li>
                         如对候选人及投票工作有异议，可通过电话或邮件向评选工作委员会反映：
@@ -81,35 +93,7 @@ foreach ($teachers as $key => $teacher) {
     <div class="ali"><span> 已选择 <span id="support_num" class="label label-info" >0</span> 位</span><button class="btn btn-primary btn-lg center-block" id="voteBtn">投票</button> </div>
 </div>
 
-<script>
-    $(function() {
-        var checked = $('input[type="checkbox"]:checked');
-        $('#support_num').text(checked.length);
-
-        $("#voteBtn").click(function () {
-            var checked = $('input[type="checkbox"]:checked');
-            var  post = true;
-            if (checked.length == 0) {
-                post = false;
-                alert('需要选择一位教师投票!');
-            }
-            if (checked.length > 10) {
-                post = false;
-                alert('最多只能选择10位投票!');
-            }
-            if (post) {
-                document.getElementById('postVoteForm').submit();
-            }
-
-        });
-
-        $('input[type="checkbox"]').click(function() {
-            var checked = $('input[type="checkbox"]:checked');
-            $('#support_num').text(checked.length);
-        });
-    })
-
-</script>
+<script type="text/javascript" src="public/postVote.js"></script>
 
 </body>
 </html>

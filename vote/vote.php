@@ -15,6 +15,11 @@ try {
         exit();
     }
 }
-require('choiceType.php');
+$state = isset($_GET['state']) ? $_GET['state'] : null;
+if ($state !== null) {
+    $state == 'stu' ? header('location:students.php') : header('location:teachers.php');
+} else {
+    require('choiceType.php');
+}
 ?>
 
