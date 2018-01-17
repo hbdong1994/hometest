@@ -11,17 +11,20 @@ $teachers = json_decode(file_get_contents('public/teachers.json'), true);
 
 $records = $t_model->getVoteRecords();
 $votes = [];
+$supports = 0;
 while ($row = $records->fetch_assoc()) {
     $votes[$row['candidate']] = [
         'name' => $teachers[$row['candidate']]['name'],
         'support' => $row['support']
     ];
+    $supports += $row['support'];
 }
 
 $tableStr = "";
 foreach ($votes as $id => $vote) {
     $tableStr .= "<tr><td>{$vote['name']}</td><td>{$vote['support']}</td></tr>";
 }
+$all = $t_model->getAllVoters();
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +42,8 @@ foreach ($votes as $id => $vote) {
 <body>
 <div class="container-fluid">
     <h1>浙江大学农学院第二届“我最喜爱的老师”评选 活动 - 投票结果 </h1>
+    总投票人数：<span class="label label-info"> <?=$all->fetch_assoc()['voters']?></span>
+    总投票数：<span class="label label-info"> <?=$supports?></span>
     <table class="table table-bordered">
         <thead>
             <tr>

@@ -77,5 +77,12 @@ class VoteModel
 
     }
 
+    public function getAllVoters()
+    {
+        $query = "select count(*) as voters from {$this->voted_table}";
+        $rows = mysqli_query($this->conn, $query);
+        return $rows;
+    }
+
 
 }

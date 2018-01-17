@@ -14,9 +14,11 @@ $cfg = require ('config.php');
 $type = isset($_POST['type']) ? $_POST['type'] : 'teach';
 if ($type == 'stu') {
     $model = new StudentVote();
+    $href = 'students.php';
     $time = 'stu_time';
 } else {
     $model = new TeacherVote();
+    $href = 'teachers.php';
     $time = 'teach_time';
 }
 
@@ -49,7 +51,7 @@ if ($model->isVoted($info['id'])) {
 }
 $model->recordVoted($info['id']);
 $model->insertVoteList($info['id'], $supports);
-exit('<script>alert("投票成功！");window.history.back();</script>');
+exit('<script>alert("投票成功！");window.location.href='.$href.';</script>');
 
 
 
