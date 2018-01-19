@@ -4,4 +4,10 @@ Stack trace:
 #1 D:\Codes\phpCodes\hometest\vote\helper.php(98): getAccessToken(Array)
 #2 D:\Codes\phpCodes\hometest\vote\helper.php(107): getAuthToken(Array)
 #3 D:\Codes\phpCodes\hometest\vote\vote.php(7): getAuthInfo(Array)
+#4 {main}[2018-01-15 21:15:43]Exception: curl请求错误---->[http_code]:400	[body]:error={"errorcode":"4002","errormsg":"invalid_request"} in D:\Codes\phpCodes\hometest\vote\helper.php:141
+Stack trace:
+#0 D:\Codes\phpCodes\hometest\vote\helper.php(78): filterResponse(Array)
+#1 D:\Codes\phpCodes\hometest\vote\helper.php(98): getAccessToken(Array)
+#2 D:\Codes\phpCodes\hometest\vote\helper.php(107): getAuthToken(Array)
+#3 D:\Codes\phpCodes\hometest\vote\vote.php(7): getAuthInfo(Array)
 #4 {main}
