@@ -5,7 +5,7 @@ require ('models/teacher.class.php');
 
 $cfg = require ('config.php');
 if (getSessionUser() === null) {
-    header('location:'.getAuthorizenUrl($cfg));
+    header('location:'.getAuthorizenUrl($cfg).'&state=teach');
     exit();
 }
 

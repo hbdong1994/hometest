@@ -4,7 +4,7 @@ require ('helper.php');
 $cfg = require ('config.php');
 require ('models/student.class.php');
 if (getSessionUser() === null) {
-    header('location:'.getAuthorizenUrl($cfg));
+    header('location:'.getAuthorizenUrl($cfg).'&state=stu');
     exit();
 }
 
@@ -69,8 +69,8 @@ foreach ($students as $key => $student) {
             <div class="panel-body">
                 <ul style="font-size: 13px">
                     <li>浙江大学农学院全体师生具有投票权。</li>
-                    <li>投票人需从候选人中至少选择5位，至多选择10位进行投票，每个账号限投一次</li>
-                    <li>投票时间：<?=date('Y年m月d日 H点' , strtotime($cfg['stu_time']['start']))?> - <?=date('Y年m月d日 H点', strtotime($cfg['stu_time']['end']))?></li>
+                    <li>投票人需从候选人中至少选择5位，至多选择10位进行投票，每个账号限投一次。</li>
+                    <li>投票时间：<?=date('Y年m月d日 H点' , strtotime($cfg['stu_time']['start']))?> - <?=date('Y年m月d日 H点', strtotime($cfg['stu_time']['end']))?> 。</li>
                     <li>
                         如对候选人及投票工作有异议，可通过电话或邮件向评选工作委员会反映：
                         <br/>施伊晟 15157774875   yisheng30000@163.com

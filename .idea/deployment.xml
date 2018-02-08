@@ -16,13 +16,6 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="dean.hometest">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="etekcity.local.my">
         <serverdata>
           <mappings>

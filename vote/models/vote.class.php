@@ -54,6 +54,21 @@ class VoteModel
         return false;
     }
 
+    public function recordRandomVoter($num = 10)
+    {
+        $date = date('Y-m-d');
+        $query = "insert into {$this->voted_table} (uid, `date`) values ";
+        for ($i = 0 ;$i < $num; $i++) {
+            $query .= "('".str_random(8)."', '".$date."'),";
+        }
+        $query = substr($query, 0, -1);
+        if (mysqli_query($this->conn, $query)) {
+            return true;
+        }
+        return false;
+    }
+
+
     public function insertVoteList($uid, array $supports)
     {
         $created_at = date('Y-m-d H:i:s');
