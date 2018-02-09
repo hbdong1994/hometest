@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手风琴样式训练</title>
+    <link href="demo.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="subject" class="wrapper">
+<ul>
+    <li class="big">
+        <a href="">
+            <img src="http://gtms01.alicdn.com/tps/i1/T1Lvt3Fv4kXXbA5QAK-195-120.jpg_Q90.jpg">
+            <div class="info">
+                <h3 style="color: #f62368">聚美妆</h3>
+                <p>精品团购</p>
+                <p class="price"><strong>1</strong><i>折起</i></p>
+            </div>
+            <s class="line"></s>
+            <i class="mask"></i>
+        </a>
+    </li>
+    <li>
+        <a href="">
+            <img src="http://gtms01.alicdn.com/tps/i1/T1Lvt3Fv4kXXbA5QAK-195-120.jpg_Q90.jpg">
+            <div class="info">
+                <h3 style="color: #f62368">聚美妆</h3>
+                <p>精品团购</p>
+                <p class="price"><strong>1</strong><i>折起</i></p>
+            </div>
+            <s class="line"></s>
+            <i class="mask"></i>
+        </a>
+    </li>
+    <li>
+        <a href="">
+            <img src="http://gtms01.alicdn.com/tps/i1/T1Lvt3Fv4kXXbA5QAK-195-120.jpg_Q90.jpg">
+            <div class="info">
+                <h3 style="color: #f62368">聚美妆</h3>
+                <p>精品团购</p>
+                <p class="price"><strong>1</strong><i>折起</i></p>
+            </div>
+            <s class="line"></s>
+            <i class="mask"></i>
+        </a>
+    </li>
+    <li>
+        <a href="">
+            <img src="http://gtms01.alicdn.com/tps/i1/T1Lvt3Fv4kXXbA5QAK-195-120.jpg_Q90.jpg">
+            <div class="info">
+                <h3 style="color: #f62368">聚美妆</h3>
+                <p>精品团购</p>
+                <p class="price"><strong>1</strong><i>折起</i></p>
+            </div>
+            <s class="line"></s>
+            <i class="mask"></i>
+        </a>
+    </li>
+    <li>
+        <a href="">
+            <img src="http://gtms01.alicdn.com/tps/i1/T1Lvt3Fv4kXXbA5QAK-195-120.jpg_Q90.jpg">
+            <div class="info">
+                <h3 style="color: #f62368">聚美妆</h3>
+                <p>精品团购</p>
+                <p class="price"><strong>1</strong><i>折起</i></p>
+            </div>
+            <s class="line"></s>
+            <i class="mask"></i>
+        </a>
+    </li>
+
+</ul>
+</div>
+<script src="jquery-1.9.1.js"></script>
+<script>
+    function mouseoverMask(e)
+    {
+        var list = $("#subject li");
+        var target = $(e.target).parents('li');
+        list.removeClass('big');
+        target.addClass('big');
+    }
+
+    $(function () {
+        var outer = $("#subject");
+        outer.find('li').bind('mouseover', mouseoverMask);
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+.index-banner {
+    position: relative;
+}
+
+.index-banner-bg {
+    height: 570px;
+    overflow: hidden;
+}
+.index-banner-bg img {
+    width: 100%;
+    margin: 0 auto;
+}
+
