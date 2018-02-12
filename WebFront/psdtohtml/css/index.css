@@ -70,3 +70,17 @@
     border-style: solid solid solid solid;
     border-width: 78px 78px 10px 78px;
 }
+
+.index-menus .menu-lists {
+    margin-top: 150px;
+    overflow: hidden;
+}
+
+.index-menus .menu-lists ul {
+
+}
+
+.index-menus .menu-item {
+    width: 520px;
+    margin-left: 60px;
+}
