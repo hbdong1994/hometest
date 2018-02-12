@@ -11,3 +11,62 @@
     margin: 0 auto;
 }
 
+.index-banner-info {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    margin-left: -388px;
+
+}
+
+.index-banner-info .index-banner-title {
+    width: 776px;
+    height: 117px;
+    background: url("../images/banner-title.png");
+}
+
+.index-banner-info .index-banner-desc {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+    color: #fff;
+}
+
+.index-banner-info .index-banner-desc .line {
+    width: 43px;
+    display: inline-block;
+    border-top: 1px solid;
+    margin: 0 26px;
+    vertical-align: middle;
+}
+
+.index-menus {
+    position: relative;
+    border-top: 4px solid #f34949;
+}
+
+.index-menus .menu-tips {
+    position: relative;
+    left: 50%;
+    top: 0;
+    margin-left: -76px;
+    width: 156px;
+    height: 71px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 65px;
+    color: #fff;
+    background: #f34949;
+}
+
+.index-menus .menu-tips:after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0px;
+    border-color: transparent transparent #fff transparent;
+    border-style: solid solid solid solid;
+    border-width: 78px 78px 10px 78px;
+}
